@@ -1,6 +1,6 @@
 # Değişiklik günlüğü
 
-## 2.0.0 — Yayınlanmadı
+## 2.0.0-rc.1 — 24 Ekim 2026 (Ön sürüm)
 
 ### Değişti
 
