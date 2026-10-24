@@ -1,0 +1,16 @@
+name: Hata bildirimi
+description: Tekrarlanabilir bir davranış sorunu bildirin.
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Tekrarlama adımları ve beklenen davranış
+      description: Kişisel veri, sipariş bilgisi, erişim anahtarı veya özel mağaza kodu paylaşmayın.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Sürüm, tarayıcı ve tema bilgisi
+    validations:
+      required: true

@@ -1,0 +1,54 @@
+{# Midas Dijital — 2.0.0. Configure real product IDs before enabling. #}
+{% set giftModule = 'on' %}
+{% set standardGiftOption = 'on' %}
+{% set premiumGiftOption = 'on' %}
+{% set standardGiftProductId = 0 %}
+{% set premiumGiftProductId = 0 %}
+{% set standardGiftTitle = 'Standart hediye paketi' %}
+{% set premiumGiftTitle = 'Premium hediye paketi' %}
+{% set standardGiftDescription = 'Özenle hazırlanmış hediye ambalajı.' %}
+{% set premiumGiftDescription = 'Özel kutu ve hediye ambalajı.' %}
+{% set standardGiftPrice = 'Fiyat için ürün kartını kontrol edin' %}
+{% set premiumGiftPrice = 'Fiyat için ürün kartını kontrol edin' %}
+{% set standardGiftUrl = '' %}
+{% set premiumGiftUrl = '' %}
+{% set standardGiftImage = '' %}
+{% set premiumGiftImage = '' %}
+{% set customizationGroupId = 0 %}
+{% set deliveryDateFieldId = 0 %}
+{% set giftMessageFieldId = 0 %}
+{% set deliveryDateModule = 'off' %}
+{% set giftMessageModule = 'off' %}
+
+{% if giftModule == 'on' and product.id not in [standardGiftProductId, premiumGiftProductId] %}
+<section class="md-gift" data-md-gift data-product-id="{{ product.id|e('html_attr') }}" data-group-id="{{ customizationGroupId|e('html_attr') }}" aria-label="Hediye paketi">
+  <label class="md-gift__toggle">
+    <input type="checkbox" data-md-toggle disabled aria-expanded="false" aria-controls="md-options-{{ product.id|e('html_attr') }}">
+    Hediye paketi yaptırmak istiyorum
+  </label>
+  <div id="md-options-{{ product.id|e('html_attr') }}" data-md-options hidden>
+    <fieldset>
+      <legend>Paket seçimi</legend>
+      {% if standardGiftOption == 'on' and standardGiftProductId > 0 %}
+      <div class="md-gift__choice">
+        <img class="md-gift__image" data-md-image="{{ standardGiftImage|e('html_attr') }}" alt="{{ standardGiftTitle|e('html_attr') }}" width="72" height="72" loading="lazy" hidden>
+        <label><input type="radio" name="md-gift-{{ product.id|e('html_attr') }}" value="{{ standardGiftProductId|e('html_attr') }}" data-md-option checked disabled> {{ standardGiftTitle|e }}</label>
+        <p>{{ standardGiftDescription|e }} <span class="md-gift__price">{{ standardGiftPrice|e }}</span></p>
+        <a data-md-url="{{ standardGiftUrl|e('html_attr') }}" target="_blank" rel="noopener noreferrer" hidden>Görüntüle</a>
+      </div>
+      {% endif %}
+      {% if premiumGiftOption == 'on' and premiumGiftProductId > 0 %}
+      <div class="md-gift__choice">
+        <img class="md-gift__image" data-md-image="{{ premiumGiftImage|e('html_attr') }}" alt="{{ premiumGiftTitle|e('html_attr') }}" width="72" height="72" loading="lazy" hidden>
+        <label><input type="radio" name="md-gift-{{ product.id|e('html_attr') }}" value="{{ premiumGiftProductId|e('html_attr') }}" data-md-option{% if standardGiftOption != 'on' or standardGiftProductId <= 0 %} checked{% endif %} disabled> {{ premiumGiftTitle|e }}</label>
+        <p>{{ premiumGiftDescription|e }} <span class="md-gift__price">{{ premiumGiftPrice|e }}</span></p>
+        <a data-md-url="{{ premiumGiftUrl|e('html_attr') }}" target="_blank" rel="noopener noreferrer" hidden>Görüntüle</a>
+      </div>
+      {% endif %}
+    </fieldset>
+
+  </div>
+  <p class="md-gift__status" data-md-status role="status" aria-live="polite">Hediye paketi şu anda kullanılamıyor.</p>
+  <noscript>Hediye paketi seçenekleri için JavaScript gereklidir.</noscript>
+</section>
+{% endif %}

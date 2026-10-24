@@ -1,77 +1,97 @@
-IdeaSoft Hediye Paketi Bileşeni
+# IdeaSoft Hediye Paketi Bileşeni
 
-IdeaSoft ürün detay sayfasına ücretli hediye paketi seçenekleri ekleyen, mobil uyumlu bir tema bileşenidir.
+[![Doğrulama](https://github.com/midasdijital/ideasoft-gift-package/actions/workflows/ci.yml/badge.svg)](https://github.com/midasdijital/ideasoft-gift-package/actions/workflows/ci.yml)
 
-Geliştiren: Midas Dijital E-Ticaret Danışmanlık
+IdeaSoft ürün detay sayfalarına ücretli standart ve premium hediye paketi seçenekleri eklemek için geliştirilen tema bileşeni.
 
-Özellikler
+**Midas Dijital**, e-ticaret danışmanlığı ve mağaza geliştirme hizmetleri sunan bir ajanstır. Bu proje ajansın tema entegrasyonları için geliştirdiği açık kaynak bir bileşendir; IdeaSoft'un resmî ürünü değildir.
 
-Birden fazla ücretli paket seçeneği
+> **2.0 geliştirme sürümü:** 1.x'teki sabit süreyle paket ekleme kaldırıldı. Hediye özelliği gerçek sepet sonucunu döndüren bir mağaza entegrasyonu kurulana kadar devre dışıdır. Bu dal henüz kararlı 2.0 release olarak yayınlanmamıştır.
 
-Seçilen paket ürününü ana üründen sonra otomatik olarak sepete ekleme
+## Özellikler
 
-IdeaSoft'un yerleşik data-selector="add-to-cart" mekanizmasıyla çalışma
+- Standart/premium paket ve ürün bazlı seçenekler.
+- Ana ürün başarısı doğrulandıktan sonra tek paket ekleme.
+- Çift tıklama koruması ve kısmi başarıda tekrar ürün eklemeyi engelleme.
+- Erişilebilir alanlar, durum mesajları ve mobil uyumlu CSS.
+- Harici çalışma zamanı kütüphanesi, CDN, izleme veya API anahtarı gerektirmez.
+- Ayrı CSS/JavaScript dosyaları; inline script gerektirmez.
 
-Mobil uyumlu modern görünüm
+## Gereksinimler ve uyumluluk
 
-Hediye paketi ürünlerinin kendi sayfalarında bileşeni gizleme
+IdeaSoft tema dosyalarına ve sepet entegrasyon koduna erişim gerekir. Satışa açık, stoğu uygun bir paket ürünü oluşturulmalıdır. Aynı ürün için sayfada yalnızca bir modül kullanın. `ideasoft-gift-package` ile `ideasoft-gift-delivery-module` alternatif ürünlerdir; ikisini birlikte yüklemeyin.
 
-JavaScript ile seçili seçenek vurgusu
+Desteklenen buton işaretlemesi:
 
-Dosyalar
+```html
+<button
+  type="button"
+  data-selector="add-to-cart"
+  data-context="detail"
+  data-product-id="42"
+>
+  Sepete ekle
+</button>
+```
 
-ideasoft-gift-package/
-├── assets/
-│   ├── gift-package.css
-│   └── gift-package.js
-├── gift-package.twig
-├── LICENSE
-└── README.md
+`.add-to-cart-button` sınıfı zorunlu değildir. Form submit, hızlı alışveriş, SPA geçişleri veya farklı buton yapıları ek tema entegrasyonu gerektirir. Dinleyici, hediye açıkken tıklamayı yakalar ve varsayılan tema işleyicisini durdurur; daha önce çalışan bir capture işleyicisiyle birlikte çift istek oluşmadığını test mağazasında doğrulayın. Genel IdeaSoft sürüm uyumluluğu veya canlı sipariş doğrulaması iddia edilmez.
 
-Kurulum
+## Kurulum
 
-gift-package.twig dosyasını IdeaSoft temanızın uygun snippet klasörüne yükleyin.
+1. [Repoyu](https://github.com/midasdijital/ideasoft-gift-package) klonlayın veya doğrulanmış sürümün ZIP'ini açın. `src/` asıl kaynaktır; `dist/` üretilir.
+2. `src/gift-package.twig` dosyasını temanın `html/snippets/product/` klasörüne yükleyin.
+3. `src/gift-package.css` ve `src/gift-package.js` dosyalarını temanızın statik dosya alanına yükleyin. Aşağıdaki `/assets/` yolu örnektir; gerçek URL'lerin 200 döndüğünü kontrol edin.
+4. Ürün detay şablonunda `.product-cart-buttons` bloğunun hemen üstüne ekleyin:
 
-gift-package.css ve gift-package.js dosyalarını tema asset klasörüne yükleyin.
+```twig
+{% include 'html/snippets/product/gift-package.twig' %}
+```
 
-detail.twig içinde .product-cart-buttons bloğunun hemen üstüne aşağıdaki satırı ekleyin:
+5. Tema yerleşiminde CSS'i bir kez, mağazaya özel entegrasyonu ve ardından modül JavaScript'ini yükleyin:
 
-{% include "html/snippets/product/gift-package.twig" %}
+```html
+<link rel="stylesheet" href="/assets/gift-package.css" />
+<script src="/assets/midas-cart-adapter.local.js" defer></script>
+<script src="/assets/gift-package.js" defer></script>
+```
 
-Tema dosya yolunuz farklıysa include yolunu kendi klasör yapınıza göre değiştirin.
+6. Twig başındaki paket ürün ID'lerini `0` yerine mağazanızdaki gerçek pozitif ID'lerle değiştirin. Başlık, açıklama ve fiyat metinlerini düzenleyin. `standardGiftOption` / `premiumGiftOption` ile seçenekleri, `giftModule` ile tüm modülü `on` / `off` yapabilirsiniz.
+7. [Sepet entegrasyonu sözleşmesini](docs/cart-integration.md) uygulayın ve [mağaza kabul kontrollerini](docs/store-checklist.md) tamamlayın. Tema önbelleğini temizleyin.
 
-Dosyaları ayrı yüklemek istemiyorsanız gift-package.twig içeriğini aynı konuma doğrudan yapıştırabilir, CSS ve JavaScript'i ilgili tema dosyalarına ekleyebilirsiniz.
+Ürün ID'si veya entegrasyon yoksa hediye seçimi kapalı kalır; ana ürün normal tema akışıyla eklenebilir. CSS rengini kendi dosyanızda `.md-gift { --md-accent: #9f1239; }` ile özelleştirebilirsiniz. Metinler HTML olarak çalıştırılmaz.
 
-Ürünleri düzenleme
+`standardGiftUrl` / `premiumGiftUrl` ile ürün bağlantılarını, `standardGiftImage` / `premiumGiftImage` ile görselleri ekleyebilirsiniz. Boş veya güvenli HTTP(S) URL olmayan değerler gösterilmez. HTTPS mağazada HTTP hedefleri reddedilir. Uzak görseller ziyaretçinin IP adresini görebilir; aynı mağazada barındırılması önerilir.
 
-Hediye paketi ürünlerini önce IdeaSoft yönetim panelinde normal ürün olarak oluşturun. Sonra gift-package.twig içindeki her seçenekte şu alanları değiştirin:
+Gösterilen fiyat yalnızca bilgilendirme metnidir; gerçek fiyatı, stoğu, varyantı ve yetkileri IdeaSoft sunucusu belirler. Bir ana ürün ekleme işlemi için bir paket eklenir; ana ürün adedi otomatik olarak pakete kopyalanmaz. Paket ve ana ürün ayrı sepet satırlarıdır, atomik bir işlem veya otomatik silme bağlantısı yoktur.
 
-<input type="radio" name="giftProducts" value="464">
-<span class="md-gift-package__price">+100,00 TL</span>
-<a href="/urun/hediye-paketi">Görüntüle</a>
+## 1.x'ten geçiş
 
-value: IdeaSoft ürün ID'si
+Eski snippet, JavaScript ve gizli paket butonunu kaldırın. Yeni dosyaları birlikte yükleyin; eski ZIP'i yeni kaynaklarla karıştırmayın. 1.x'teki gecikmeye dayalı otomatik ekleme veya yerleşik özelleştirme alanlarını değiştirme davranışı korunmaz. Bu değişiklik mağazaya özel sepet entegrasyonu gerektirir. Yeni sürümü doğrudan canlı temanın üstüne yazmayın; test teması üzerinde doğrulayıp geçiş yapın. Eski sürüme dönüş, eski hata davranışlarını da geri getirir.
 
-Fiyat metni: Müşterinin göreceği tutar
+## Geliştirme ve dağıtım
 
-href: Paket ürününün bağlantısı
+Node.js yalnızca geliştirme içindir; mağazada Node.js çalışmaz. Node 24.15+ kullanın.
 
-Gerçek sepet fiyatı IdeaSoft'taki ürün kartından alınır. Twig dosyasındaki fiyat yalnızca bilgilendirme metnidir.
+```sh
+git clone https://github.com/midasdijital/ideasoft-gift-package.git
+cd ideasoft-gift-package
+npm ci --ignore-scripts
+npm run validate
+```
 
-Yeni paket ürünlerinin kendi sayfalarında bileşenin görünmemesi için üstteki hariç tutma listesini güncelleyin:
+`validate`: JavaScript sözdizimi, Twig çıktı kaçış kontrolleri, biçimlendirme, gerçek şablonları render eden DOM testleri ve ZIP üretimi. Twig.js testleri IdeaSoft'un sunucu Twig sürümünde yapılan bir testin yerine geçmez. CI ayrıca geliştirme bağımlılıkları için `npm audit` çalıştırır. Tarayıcıya gönderilen kodun çalışma zamanı npm bağımlılığı yoktur.
 
-{% if product.id not in [464, 465] %}
+`npm run build`, yalnızca kaynak ve belgeleri içeren `dist/ideasoft-gift-package-v2.0.0.zip` üretir. ZIP'in adı geliştirme paketinin sürümünü gösterir; kararlı yayın için etiket/release gerekir. ZIP üretimi aynı kaynakta aynı baytları verir. Test mağazası kontrolü henüz otomatikleştirilmemiştir.
 
-Uyumluluk notu
+```text
+src/       Twig, JavaScript ve CSS
+docs/      Sepet sözleşmesi ve mağaza kabul kontrolleri
+tests/     Şablon ve davranış regresyon testleri
+scripts/   Kontrol ve dağıtım araçları
+```
 
-Bileşen, sepete ekleme butonunda aşağıdaki IdeaSoft işaretlemesini kullanan temalar için hazırlanmıştır:
+## Güvenlik, katkı ve lisans
 
-data-selector="add-to-cart"
-data-context="detail"
-data-product-id="..."
+[Güvenlik politikası](SECURITY.md) · [Katkı rehberi](CONTRIBUTING.md) · [Değişiklik günlüğü](CHANGELOG.md) · [MIT lisansı](LICENSE)
 
-Özel olarak değiştirilmiş temalarda buton seçicisinin gift-package.js içinde uyarlanması gerekebilir.
-
-Lisans
-
-MIT Lisansı ile sunulmuştur.
+Müşteri ayarlarını, sipariş bilgilerini veya erişim anahtarlarını repoya eklemeyin. Açık kaynak bileşen herhangi bir hizmet seviyesi veya tüm temalarda çalışma garantisi içermez.

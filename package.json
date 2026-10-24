@@ -1,0 +1,30 @@
+{
+  "name": "@midasdijital/ideasoft-gift-package",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Midas Dijital tarafından geliştirilen IdeaSoft tema bileşeni.",
+  "license": "MIT",
+  "engines": {
+    "node": "^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "build": "node scripts/package.mjs",
+    "validate": "npm run check && npm run format:check && npm test && npm run build"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.3",
+    "prettier": "3.9.10",
+    "twig": "3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/midasdijital/ideasoft-gift-package.git"
+  },
+  "bugs": {
+    "url": "https://github.com/midasdijital/ideasoft-gift-package/issues"
+  }
+}

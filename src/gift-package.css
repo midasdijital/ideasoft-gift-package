@@ -1,0 +1,117 @@
+/* Midas Dijital — IdeaSoft gift options. MIT License. */
+.md-gift,
+.md-gift * {
+  box-sizing: border-box;
+}
+.md-gift {
+  --md-accent: #b91c35;
+  width: 100%;
+  margin: 0 0 16px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fff;
+  color: #202020;
+  font:
+    14px/1.5 Arial,
+    sans-serif;
+}
+.md-gift [hidden] {
+  display: none !important;
+}
+.md-gift__toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+.md-gift input[type='checkbox'],
+.md-gift input[type='radio'] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--md-accent);
+}
+.md-gift fieldset {
+  min-width: 0;
+  margin: 14px 0 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.md-gift legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+.md-gift__choice {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+.md-gift__choice:last-child {
+  border: 0;
+}
+.md-gift__choice label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.md-gift__choice p {
+  margin: 4px 0 0 30px;
+  color: #555;
+}
+.md-gift__price {
+  color: var(--md-accent);
+  font-weight: 700;
+}
+.md-gift__field {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+.md-gift__field input,
+.md-gift__field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #888;
+  border-radius: 6px;
+  color: inherit;
+  background: #fff;
+  font: inherit;
+}
+.md-gift textarea {
+  resize: vertical;
+}
+.md-gift :focus-visible {
+  outline: 3px solid var(--md-accent);
+  outline-offset: 3px;
+}
+.md-gift__status {
+  margin: 8px 0 0;
+  color: #555;
+}
+.md-gift__status:empty {
+  margin: 0;
+}
+.md-gift__count {
+  text-align: right;
+  color: #555;
+  font-size: 12px;
+}
+
+.md-gift__image {
+  float: right;
+  width: 72px;
+  height: 72px;
+  margin: 0 0 8px 12px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.md-gift__choice {
+  display: flow-root;
+}
+.md-gift__choice a {
+  display: inline-block;
+  margin: 6px 0 0 30px;
+  color: #374151;
+  text-decoration: underline;
+}
