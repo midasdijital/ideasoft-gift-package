@@ -6,7 +6,7 @@ IdeaSoft ürün detay sayfalarına ücretli standart ve premium hediye paketi se
 
 **Midas Dijital**, e-ticaret danışmanlığı ve mağaza geliştirme hizmetleri sunan bir ajanstır. Bu proje ajansın tema entegrasyonları için geliştirdiği açık kaynak bir bileşendir; IdeaSoft'un resmî ürünü değildir.
 
-> **2.0 geliştirme sürümü:** 1.x'teki sabit süreyle paket ekleme kaldırıldı. Hediye özelliği gerçek sepet sonucunu döndüren bir mağaza entegrasyonu kurulana kadar devre dışıdır. Bu dal henüz kararlı 2.0 release olarak yayınlanmamıştır.
+> **2.0.0-rc.1 ön sürümü:** 1.x'teki sabit süreyle paket ekleme kaldırıldı. Hediye özelliği gerçek sepet sonucunu döndüren bir mağaza entegrasyonu kurulana kadar devre dışıdır. Bu sürüm ön sürümdür; gerçek mağaza doğrulaması tamamlanmadan kararlı kabul edilmez.
 
 ## Özellikler
 
@@ -68,6 +68,10 @@ Gösterilen fiyat yalnızca bilgilendirme metnidir; gerçek fiyatı, stoğu, var
 
 Eski snippet, JavaScript ve gizli paket butonunu kaldırın. Yeni dosyaları birlikte yükleyin; eski ZIP'i yeni kaynaklarla karıştırmayın. 1.x'teki gecikmeye dayalı otomatik ekleme veya yerleşik özelleştirme alanlarını değiştirme davranışı korunmaz. Bu değişiklik mağazaya özel sepet entegrasyonu gerektirir. Yeni sürümü doğrudan canlı temanın üstüne yazmayın; test teması üzerinde doğrulayıp geçiş yapın. Eski sürüme dönüş, eski hata davranışlarını da geri getirir.
 
+## Sürümü indirme
+
+[v2.0.0-rc.1 ön sürümü](https://github.com/midasdijital/ideasoft-gift-package/releases/tag/v2.0.0-rc.1) sayfasından kurulum ZIP'ini ve `SHA256SUMS.txt` dosyasını indirin. `Source code` arşivleri GitHub'ın otomatik kaynak kopyalarıdır; kuruluma yönelik paket sürüm adını taşıyan ZIP'tir. Kurulumdan önce README geçiş adımlarını izleyin.
+
 ## Geliştirme ve dağıtım
 
 Node.js yalnızca geliştirme içindir; mağazada Node.js çalışmaz. Node 24.15+ kullanın.
@@ -81,7 +85,7 @@ npm run validate
 
 `validate`: JavaScript sözdizimi, Twig çıktı kaçış kontrolleri, biçimlendirme, gerçek şablonları render eden DOM testleri ve ZIP üretimi. Twig.js testleri IdeaSoft'un sunucu Twig sürümünde yapılan bir testin yerine geçmez. CI ayrıca geliştirme bağımlılıkları için `npm audit` çalıştırır. Tarayıcıya gönderilen kodun çalışma zamanı npm bağımlılığı yoktur.
 
-`npm run build`, yalnızca kaynak ve belgeleri içeren `dist/ideasoft-gift-package-v2.0.0.zip` üretir. ZIP'in adı geliştirme paketinin sürümünü gösterir; kararlı yayın için etiket/release gerekir. ZIP üretimi aynı kaynakta aynı baytları verir. Test mağazası kontrolü henüz otomatikleştirilmemiştir.
+`npm run build`, yalnızca kaynak ve belgeleri içeren `dist/ideasoft-gift-package-v2.0.0-rc.1.zip` üretir. Bu ZIP ön sürüm paketidir; kararlı yayın ayrıca yapılır. ZIP üretimi aynı kaynakta aynı baytları verir. Test mağazası kontrolü henüz otomatikleştirilmemiştir.
 
 ```text
 src/       Twig, JavaScript ve CSS
