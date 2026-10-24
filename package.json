@@ -2,7 +2,7 @@
   "name": "@midasdijital/ideasoft-gift-package",
   "version": "2.0.0-rc.1",
   "private": true,
-  "description": "IdeaSoft mağazaları için ücretli hediye paketi seçenekleri sunan tema bileşeni. Midas Dijital e-ticaret danışmanlık ajansı tarafından geliştirilmiştir.",
+  "description": "Theme component for paid gift packaging options in IdeaSoft stores, developed by Midas Dijital.",
   "license": "MIT",
   "engines": {
     "node": "^24.15.0 || >=26.0.0"
