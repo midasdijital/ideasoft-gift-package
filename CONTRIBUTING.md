@@ -13,7 +13,7 @@ npm run validate
 - Keep the README, GitHub repository description, customer release notes and changelog, store acceptance checklists, security guidance, support issue form, and storefront text in Turkish. The audience is Turkish e-commerce merchants.
 - Keep technical identifiers and the standard license text in their original form. Preserve copyright holders' names exactly.
 - Technical API and adapter documentation is developer documentation and must be in English, even when linked from the Turkish README.
-- Apply this policy to new work; do not rewrite published commit history or existing release artifacts to translate them.
+- Coordinate any rewrite of published commit history with the repository maintainers. Keep customer-facing release notes in Turkish.
 
 ## Development and review
 
